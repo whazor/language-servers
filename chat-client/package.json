@@ -10,7 +10,7 @@
     "author": "Amazon Web Services",
     "license": "Apache-2.0",
     "scripts": {
-        "compile": "tsc --build && npm run package",
+        "compile": "tsc --build",
         "test:prettier": "prettier . --check",
         "test": "npm run test:prettier",
         "fix:prettier": "prettier . --write",
