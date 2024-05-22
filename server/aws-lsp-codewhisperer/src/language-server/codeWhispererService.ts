@@ -1,4 +1,4 @@
-import { CredentialsProvider, BearerCredentials } from '@aws/language-server-runtimes/server-interface'
+import { BearerCredentials, CredentialsProvider } from '@aws/language-server-runtimes/server-interface'
 import { AWSError, CredentialProviderChain, Credentials } from 'aws-sdk'
 import { PromiseResult } from 'aws-sdk/lib/request'
 import { v4 as uuidv4 } from 'uuid'
@@ -57,6 +57,9 @@ export class CodeWhispererServiceIAM extends CodeWhispererServiceBase {
             region: this.codeWhispererRegion,
             endpoint: this.codeWhispererEndpoint,
             credentialProvider: new CredentialProviderChain([
+                () => {
+                    return new AWS.SharedIniFileCredentials({ profile: 'codewhisperer' })
+                },
                 () => credentialsProvider.getCredentials('iam') as Credentials,
             ]),
             onRequestSetup: [

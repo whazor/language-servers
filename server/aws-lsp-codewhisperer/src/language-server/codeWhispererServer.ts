@@ -1,5 +1,8 @@
 import {
     CancellationToken,
+    CompletionItemKind,
+    CompletionList,
+    CompletionParams,
     CredentialsProvider,
     InlineCompletionItemWithReferences,
     InlineCompletionListWithReferences,
@@ -536,6 +539,87 @@ export const CodewhispererServerFactory =
         lsp.extensions.onLogInlineCompletionSessionResults(onLogInlineCompletionSessionResultsHandler)
         lsp.onInitialized(updateConfiguration)
         lsp.didChangeConfiguration(updateConfiguration)
+
+        lsp.addInitializer(() => {
+            return {
+                capabilities: {
+                    completionProvider: {
+                        resolveProvider: false,
+                    },
+                },
+            }
+        })
+
+        // Plain LSP completion
+        const onCompletionHandler = async (
+            params: CompletionParams,
+            _token: CancellationToken
+        ): Promise<CompletionList> => {
+            return workspace.getTextDocument(params.textDocument.uri).then(textDocument => {
+                if (!textDocument) {
+                    logging.log(`textDocument [${params.textDocument.uri}] not found`)
+                    return {
+                        isIncomplete: false,
+                        items: [],
+                    }
+                }
+
+                const inferredLanguageId = getSupportedLanguageId(textDocument)
+                if (!inferredLanguageId) {
+                    logging.log(
+                        `textDocument [${params.textDocument.uri}] with languageId [${textDocument.languageId}] not supported`
+                    )
+                    return {
+                        isIncomplete: false,
+                        items: [],
+                    }
+                }
+
+                const fileContext = getFileContext({ textDocument, inferredLanguageId, position: params.position })
+
+                const requestContext = {
+                    fileContext,
+                    maxResults: 10,
+                }
+
+                return codeWhispererService
+                    .generateSuggestions({
+                        ...requestContext,
+                        fileContext: {
+                            ...requestContext.fileContext,
+                            leftFileContent: requestContext.fileContext.leftFileContent
+                                .slice(-CONTEXT_CHARACTERS_LIMIT)
+                                .replaceAll('\r\n', '\n'),
+                            rightFileContent: requestContext.fileContext.rightFileContent
+                                .slice(0, CONTEXT_CHARACTERS_LIMIT)
+                                .replaceAll('\r\n', '\n'),
+                        },
+                    })
+                    .then(suggestionResponse => {
+                        logging.log('Got suggestions: ' + JSON.stringify(suggestionResponse.suggestions))
+
+                        const items = suggestionResponse.suggestions.map(suggestion => ({
+                            label: suggestion.content,
+                            kind: CompletionItemKind.Text,
+                        }))
+
+                        return {
+                            isIncomplete: false,
+                            items: items,
+                        }
+                    })
+                    .catch(err => {
+                        logging.log('Recommendation failure: ' + err)
+
+                        return {
+                            isIncomplete: false,
+                            items: [],
+                        }
+                    })
+            })
+        }
+
+        lsp.onCompletion(onCompletionHandler)
 
         lsp.onDidChangeTextDocument(async p => {
             const textDocument = await workspace.getTextDocument(p.textDocument.uri)

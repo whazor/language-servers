@@ -5,6 +5,6 @@ import { standalone } from '@aws/language-server-runtimes/runtimes/standalone'
 const props: RuntimeProps = {
     version: '0.1.0',
     servers: [HelloWorldServer],
-    name: 'Hello World',
+    name: 'Hello World Test',
 }
 standalone(props)

@@ -1,10 +1,13 @@
 import {
-    Server,
+    CredentialsProvider,
+    InlineCompletionItem,
+    InlineCompletionList,
+    InlineCompletionParams,
     Logging,
     Lsp,
+    Server,
     Telemetry,
     Workspace,
-    CredentialsProvider,
 } from '@aws/language-server-runtimes/server-interface'
 import {
     CancellationToken,
@@ -25,7 +28,27 @@ export const HelloWorldServerFactory =
         logging: Logging
         telemetry: Telemetry
     }) => {
-        const onInitializedHandler = async () => {}
+        const initializer = () => {
+            logging.log('Calling initializer')
+            return {
+                capabilities: {
+                    completionProvider: {
+                        resolveProvider: false,
+                    },
+                },
+            }
+        }
+
+        const onInitializedHandler = () => {
+            logging.log('Calling onInitialisedHandler')
+            return {
+                capabilities: {
+                    completionProvider: {
+                        resolveProvider: false,
+                    },
+                },
+            }
+        }
 
         const onCompletionHandler = async (
             _params: CompletionParams,
@@ -34,17 +57,38 @@ export const HelloWorldServerFactory =
             // For the example, we will always return these completion items
             const items: CompletionItem[] = [
                 {
-                    label: 'Hello World!!!',
+                    label: 'Hello DEXP World',
                     kind: CompletionItemKind.Text,
                 },
                 {
-                    label: 'Hello Developers!!!',
+                    label: 'Hello DEXP Developers',
                     kind: CompletionItemKind.Text,
                 },
             ]
 
             const completions: CompletionList = {
                 isIncomplete: false,
+                items,
+            }
+
+            return completions
+        }
+
+        const onInlineCompletionHandler = async (
+            _params: InlineCompletionParams,
+            _token: CancellationToken
+        ): Promise<InlineCompletionList> => {
+            // For the example, we will always return these completion items
+            const items: InlineCompletionItem[] = [
+                {
+                    insertText: 'Hello DEXP World',
+                },
+                {
+                    insertText: 'Hello DEXP Developers',
+                },
+            ]
+
+            const completions: InlineCompletionList = {
                 items,
             }
 
@@ -64,8 +108,10 @@ export const HelloWorldServerFactory =
         }
         const { lsp, logging } = features
 
+        lsp.addInitializer(initializer)
         lsp.onInitialized(onInitializedHandler)
         lsp.onCompletion(onCompletionHandler)
+        lsp.onInlineCompletion(onInlineCompletionHandler)
         lsp.onExecuteCommand(onExecuteCommandHandler)
 
         logging.log('The Hello World Capability has been initialised')
