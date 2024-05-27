@@ -65,6 +65,8 @@ export class CsharpDependencyGraph extends DependencyGraph {
             }
         } catch (error) {
             this.logging.log(`ERROR: ${error}`)
+            //@ts-ignore
+            this.logging.log(`ERROR: ${error.stack}`)
             throw error
         }
     }

@@ -19,6 +19,7 @@ import {
 import { CodeWhispererServiceToken } from '../codeWhispererService'
 import { sleep } from '../dependencyGraph/commonUtil'
 import { AggregatedCodeScanIssue, RawCodeScanIssue } from './types'
+import { randomUUID } from 'crypto'
 
 export class SecurityScanHandler {
     private client: CodeWhispererServiceToken
@@ -61,7 +62,7 @@ export class SecurityScanHandler {
             this.logging.log(`Complete Getting presigned Url for uploading src context.`)
             this.logging.log(`Uploading src context...`)
             await this.uploadArtifactToS3(zipContent, response)
-            this.logging.log(`Complete uploading src context.`)
+            this.logging.log(`Complete uploading src context. response: ${response.toString()}`)
 
             const artifactMap: ArtifactMap = {
                 SourceCode: response.uploadId,
@@ -104,8 +105,10 @@ export class SecurityScanHandler {
             programmingLanguage: {
                 languageName,
             },
+            // scope: 'FILE',
+            // codeScanName: randomUUID(),
         }
-        this.logging.log(`Creating scan job...`)
+        this.logging.log(`Creating scan job... ${JSON.stringify(req)}`)
         try {
             const resp = await this.client.startCodeAnalysis(req)
             this.logging.log(`Request id: ${resp.$response.requestId}`)

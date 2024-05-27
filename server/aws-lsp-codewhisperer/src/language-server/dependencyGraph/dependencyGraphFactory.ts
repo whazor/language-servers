@@ -23,6 +23,7 @@ export class DependencyGraphFactory {
     ): ClassType<K> {
         switch (document.languageId.toLowerCase()) {
             case 'csharp':
+            case 'cs':
                 return new languageMap['csharp'](workspace, logging, workspaceFolderPath)
             default:
                 return this.getDependencyGraphFromFileExtensions(document.uri)

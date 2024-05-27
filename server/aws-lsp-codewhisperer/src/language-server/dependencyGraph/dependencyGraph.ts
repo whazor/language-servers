@@ -2,6 +2,8 @@ import { Logging, Workspace } from '@aws/language-server-runtimes/server-interfa
 import * as admZip from 'adm-zip'
 import * as path from 'path'
 import * as CodeWhispererConstants from './constants'
+import { pathToFileURL } from 'url'
+import { getDefaultLibFilePath } from 'typescript'
 
 export interface Truncation {
     rootDir: string
@@ -26,7 +28,7 @@ export abstract class DependencyGraph {
     protected _fetchedDirs: Set<string> = new Set<string>()
     protected _totalSize = 0
     protected _tmpDir = ''
-    protected _truncDir = ''
+    protected _truncDir = '/Users/vshcherb/Projects/DEXP/language-servers/csharp_security_scan_test/../csharp_tmp'
     protected _totalLines = 0
     protected logging: Logging
     protected _workspaceFolderPath: string
@@ -137,9 +139,11 @@ export abstract class DependencyGraph {
      * @param destDir destination directory path
      */
     protected async copyFileToTmp(srcFilePath: string, destDir: string) {
-        const sourceWorkspacePath = await this.getProjectPath(srcFilePath)
-        const fileRelativePath = path.relative(sourceWorkspacePath, srcFilePath)
-        const destinationFileAbsolutePath = path.join(destDir, fileRelativePath)
+        this.logging.log(`Copying ${srcFilePath} to ${destDir}`)
+
+        // const sourceWorkspacePath = await this.getProjectPath(srcFilePath)
+        // const fileRelativePath = path.relative(sourceWorkspacePath, srcFilePath)
+        const destinationFileAbsolutePath = path.join(destDir, path.basename(srcFilePath))
         await this.workspace.fs.copy(srcFilePath, destinationFileAbsolutePath)
     }
 

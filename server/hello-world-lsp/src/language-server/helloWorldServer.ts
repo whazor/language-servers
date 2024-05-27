@@ -19,6 +19,8 @@ import {
 } from 'vscode-languageserver/node'
 import { HelloWorldService } from './helloWorldService'
 
+const LogCommand = '/helloWorld/log'
+
 export const HelloWorldServerFactory =
     (service: HelloWorldService): Server =>
     (features: {
@@ -28,6 +30,8 @@ export const HelloWorldServerFactory =
         logging: Logging
         telemetry: Telemetry
     }) => {
+        const { lsp, logging } = features
+
         const initializer = () => {
             logging.log('Calling initializer')
             return {
@@ -45,6 +49,9 @@ export const HelloWorldServerFactory =
                 capabilities: {
                     completionProvider: {
                         resolveProvider: false,
+                    },
+                    executeCommandProvider: {
+                        commands: [LogCommand],
                     },
                 },
             }
@@ -100,13 +107,12 @@ export const HelloWorldServerFactory =
             _token: CancellationToken
         ): Promise<any> => {
             switch (params.command) {
-                case '/helloWorld/log':
-                    service.logCommand()
+                case LogCommand:
+                    logging.log('Log from HelloWorld Command')
                     break
             }
             return
         }
-        const { lsp, logging } = features
 
         lsp.addInitializer(initializer)
         lsp.onInitialized(onInitializedHandler)

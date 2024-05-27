@@ -45,18 +45,23 @@ export const SecurityScanServerToken =
                 codewhispererCodeScanIssuesWithFixes: 0,
                 credentialStartUrl: credentialsProvider.getConnectionMetadata?.()?.sso?.startUrl ?? undefined,
             }
+            logging.log(`Starting security scan 2`)
             try {
                 if (!credentialsProvider.hasCredentials('bearer')) {
                     throw new Error('credentialsProvider does not have bearer token credentials')
                 }
                 if (!params.arguments || params.arguments.length === 0) {
+                    logging.log(`Incorrect params provided`)
                     throw new Error(`Incorrect params provided. Params: ${params}`)
                 }
                 const [arg] = params.arguments
-                const { ActiveFilePath: activeFilePath, ProjectPath: projectPath } = parseJson(arg)
+                const { ActiveFilePath: activeFilePath, ProjectPath: projectPath } = arg
                 if (!activeFilePath || !projectPath) {
+                    logging.log(`Error: file path or project path not provided`)
                     throw new Error(`Error: file path or project path not provided. Params: ${params}`)
                 }
+
+                logging.log(`Starting security scan 3`)
                 const activeFilePathUri = pathToFileURL(activeFilePath).href
                 const document = await workspace.getTextDocument(activeFilePathUri)
                 securityScanTelemetryEntry.codewhispererLanguage = getSupportedLanguageId(document)
@@ -66,6 +71,7 @@ export const SecurityScanServerToken =
                 /**
                  * Step 1: Generate context truncations
                  */
+                logging.log(`Getting dependency graph`)
                 const dependencyGraph = DependencyGraphFactory.getDependencyGraph(
                     document,
                     workspace,
@@ -80,13 +86,15 @@ export const SecurityScanServerToken =
                         `Selected file larger than ${dependencyGraph.getReadableSizeLimit()}. Try a different file.`
                     )
                 }
-                const contextTruncationStartTime = performance.now()
+                // const contextTruncationStartTime = performance.now()
+                logging.log(`Getting dependency graph 2`)
                 const truncation = await dependencyGraph.generateTruncation(activeFilePath)
-                securityScanTelemetryEntry.contextTruncationDuration = performance.now() - contextTruncationStartTime
-                securityScanTelemetryEntry.codewhispererCodeScanSrcPayloadBytes = truncation.srcPayloadSizeInBytes
-                securityScanTelemetryEntry.codewhispererCodeScanBuildPayloadBytes = truncation.buildPayloadSizeInBytes
-                securityScanTelemetryEntry.codewhispererCodeScanSrcZipFileBytes = truncation.zipFileSizeInBytes
-                securityScanTelemetryEntry.codewhispererCodeScanLines = truncation.lines
+                logging.log(`Getting dependency graph 3`)
+                // securityScanTelemetryEntry.contextTruncationDuration = performance.now() - contextTruncationStartTime
+                // securityScanTelemetryEntry.codewhispererCodeScanSrcPayloadBytes = truncation.srcPayloadSizeInBytes
+                // securityScanTelemetryEntry.codewhispererCodeScanBuildPayloadBytes = truncation.buildPayloadSizeInBytes
+                // securityScanTelemetryEntry.codewhispererCodeScanSrcZipFileBytes = truncation.zipFileSizeInBytes
+                // securityScanTelemetryEntry.codewhispererCodeScanLines = truncation.lines
                 scanHandler.throwIfCancelled(token)
 
                 logging.log(`Complete project context processing.`)
@@ -110,7 +118,11 @@ export const SecurityScanServerToken =
                  * Step 3:  Create scan job
                  */
                 serviceInvocationStartTime = performance.now()
-                const scanJob = await scanHandler.createScanJob(artifactMap, document.languageId.toLowerCase())
+                logging.log(`Creating scan job: ${artifactMap.toString()}`)
+                const scanJob = await scanHandler.createScanJob(
+                    artifactMap,
+                    document.languageId.toLowerCase() === 'cs' ? 'csharp' : document.languageId.toLowerCase()
+                )
                 logging.log(`Created security scan job id: ${scanJob.jobId}`)
                 securityScanTelemetryEntry.codewhispererCodeScanJobId = scanJob.jobId
                 scanHandler.throwIfCancelled(token)
@@ -174,14 +186,14 @@ export const SecurityScanServerToken =
                     error: err,
                 } as SecurityScanResponse
             } finally {
-                securityScanTelemetryEntry.duration = performance.now() - securityScanStartTime
-                securityScanTelemetryEntry.codeScanServiceInvocationsDuration =
-                    performance.now() - serviceInvocationStartTime
-                telemetry.emitMetric({
-                    name: 'codewhisperer_securityScan',
-                    result: securityScanTelemetryEntry.result,
-                    data: securityScanTelemetryEntry,
-                })
+                // securityScanTelemetryEntry.duration = performance.now() - securityScanStartTime
+                // securityScanTelemetryEntry.codeScanServiceInvocationsDuration =
+                //     performance.now() - serviceInvocationStartTime
+                // telemetry.emitMetric({
+                //     name: 'codewhisperer_securityScan',
+                //     result: securityScanTelemetryEntry.result,
+                //     data: securityScanTelemetryEntry,
+                // })
             }
         }
 
@@ -235,3 +247,7 @@ export const SecurityScanServerToken =
             scanHandler.tokenSource.dispose()
         }
     }
+
+export const SecurityScanServerServerImpl = SecurityScanServerToken(
+    credentialsProvider => new CodeWhispererServiceToken(credentialsProvider, {})
+)

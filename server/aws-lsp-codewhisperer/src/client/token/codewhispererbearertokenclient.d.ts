@@ -480,6 +480,8 @@ declare namespace CodeWhispererBearerTokenClient {
   export interface StartCodeAnalysisRequest {
     artifacts: ArtifactMap;
     programmingLanguage: ProgrammingLanguage;
+    scope?: any;
+    codeScanName? : any;
     clientToken?: StartCodeAnalysisRequestClientTokenString;
   }
   export type StartCodeAnalysisRequestClientTokenString = string;
