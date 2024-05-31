@@ -16,9 +16,11 @@ export function registerInlineCompletion(languageClient: LanguageClient) {
     languages.registerInlineCompletionItemProvider(
         [
             { scheme: 'file', language: 'typescript' },
+            { scheme: 'file', language: 'javascript' },
             { scheme: 'file', language: 'json' },
             { scheme: 'file', language: 'yaml' },
             { scheme: 'file', language: 'java' },
+            { scheme: 'file', language: 'csharp' },
         ],
         inlineCompletionProvider
     )

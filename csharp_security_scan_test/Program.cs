@@ -13,7 +13,9 @@ class Program
 
         if (File.Exists(filePath))
         {
+            // read content from file
             string content = File.ReadAllText(filePath);
+
             Console.WriteLine($"File content: {content}");
         }
         else

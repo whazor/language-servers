@@ -17,7 +17,8 @@
     "main": "./out/extension.js",
     "activationEvents": [
         "onLanguage:yaml",
-        "onLanguage:typescript"
+        "onLanguage:typescript",
+        "onLanguage:csharp"
     ],
     "contributes": {
         "commands": [
@@ -40,6 +41,10 @@
             {
                 "command": "helloWorld.log",
                 "title": "Hello World LSP - Log Command"
+            },
+            {
+                "command": "q.codescan",
+                "title": "Amazon Q - Run Security Scan for current file"
             },
             {
                 "command": "chat.sendCommandsFromUI",

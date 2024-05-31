@@ -17,7 +17,7 @@ import {
     writeEncryptionInit,
 } from './credentialsActivation'
 import { registerInlineCompletion } from './inlineCompletionActivation'
-import { registerLogCommand } from './sampleCommandActivation'
+import { registerCodeScanCommand, registerLogCommand } from './sampleCommandActivation'
 
 export async function activateDocumentsLanguageServer(extensionContext: ExtensionContext) {
     /**
@@ -94,10 +94,13 @@ export async function activateDocumentsLanguageServer(extensionContext: Extensio
             // java is illustrative of code-handling language servers
             { scheme: 'file', language: 'java' },
             { scheme: 'untitled', language: 'java' },
+            // c#
+            { scheme: 'file', language: 'csharp' },
+            { scheme: 'untitled', language: 'csharp' },
         ],
         initializationOptions: {},
         synchronize: {
-            fileEvents: workspace.createFileSystemWatcher('**/*.{json,java,yml,yaml,ts}'),
+            fileEvents: workspace.createFileSystemWatcher('**/*.{json,java,yml,yaml,ts,cs}'),
         },
     }
 
@@ -121,6 +124,7 @@ export async function activateDocumentsLanguageServer(extensionContext: Extensio
     const enableCustomCommands = process.env.ENABLE_CUSTOM_COMMANDS === 'true'
     if (enableCustomCommands) {
         await registerLogCommand(client, extensionContext)
+        await registerCodeScanCommand(client, extensionContext)
     }
 
     const enableChat = process.env.ENABLE_CHAT === 'true'
