@@ -1,0 +1,24 @@
+{
+    "parent": "0fafd74f-530b-478c-9fb1-40ee28a48b27",
+    "pid": 86444,
+    "argv": [
+        "/Users/zhenganp/.nvm/versions/node/v18.16.0/bin/node",
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/node_modules/mocha/bin/mocha.js",
+        "-r",
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/node_modules/ts-mocha/src/index.js",
+        "-b",
+        "src/language-server/netTransform/tests/metrics.test.ts"
+    ],
+    "execArgv": [],
+    "cwd": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer",
+    "time": 1721683460463,
+    "ppid": 86443,
+    "coverageFilename": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/.nyc_output/2ed57624-6018-4c18-8bfa-e148c79e55ae.json",
+    "externalId": "",
+    "uuid": "2ed57624-6018-4c18-8bfa-e148c79e55ae",
+    "files": [
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/models.ts",
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/metrics.ts",
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/utils.ts"
+    ]
+}

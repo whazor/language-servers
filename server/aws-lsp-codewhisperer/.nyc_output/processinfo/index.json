@@ -1,0 +1,21 @@
+{
+    "processes": {
+        "0fafd74f-530b-478c-9fb1-40ee28a48b27": {
+            "parent": null,
+            "children": ["2ed57624-6018-4c18-8bfa-e148c79e55ae"]
+        },
+        "2ed57624-6018-4c18-8bfa-e148c79e55ae": { "parent": "0fafd74f-530b-478c-9fb1-40ee28a48b27", "children": [] }
+    },
+    "files": {
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/models.ts": [
+            "2ed57624-6018-4c18-8bfa-e148c79e55ae"
+        ],
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/metrics.ts": [
+            "2ed57624-6018-4c18-8bfa-e148c79e55ae"
+        ],
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/utils.ts": [
+            "2ed57624-6018-4c18-8bfa-e148c79e55ae"
+        ]
+    },
+    "externalIds": {}
+}

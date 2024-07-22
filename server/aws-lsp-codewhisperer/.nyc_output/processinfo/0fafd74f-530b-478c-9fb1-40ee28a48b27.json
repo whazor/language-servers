@@ -1,0 +1,18 @@
+{
+    "parent": null,
+    "pid": 86443,
+    "argv": [
+        "/Users/zhenganp/.nvm/versions/node/v18.16.0/bin/node",
+        "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/node_modules/.bin/ts-mocha",
+        "-b",
+        "src/language-server/netTransform/tests/metrics.test.ts"
+    ],
+    "execArgv": [],
+    "cwd": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer",
+    "time": 1721683460253,
+    "ppid": 86442,
+    "coverageFilename": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/.nyc_output/0fafd74f-530b-478c-9fb1-40ee28a48b27.json",
+    "externalId": "",
+    "uuid": "0fafd74f-530b-478c-9fb1-40ee28a48b27",
+    "files": []
+}

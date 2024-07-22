@@ -1,0 +1,782 @@
+{
+    "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/models.ts": {
+        "path": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/models.ts",
+        "statementMap": {
+            "0": { "start": { "line": 2, "column": 0 }, "end": { "line": 2, "column": 62 } },
+            "1": { "start": { "line": 3, "column": 0 }, "end": { "line": 3, "column": 39 } },
+            "2": { "start": { "line": 5, "column": 0 }, "end": { "line": 11, "column": 90 } },
+            "3": { "start": { "line": 6, "column": 4 }, "end": { "line": 6, "column": 84 } },
+            "4": { "start": { "line": 7, "column": 4 }, "end": { "line": 7, "column": 84 } },
+            "5": { "start": { "line": 8, "column": 4 }, "end": { "line": 8, "column": 106 } },
+            "6": { "start": { "line": 9, "column": 4 }, "end": { "line": 9, "column": 94 } },
+            "7": { "start": { "line": 10, "column": 4 }, "end": { "line": 10, "column": 80 } }
+        },
+        "fnMap": {
+            "0": {
+                "name": "(anonymous_0)",
+                "decl": { "start": { "line": 5, "column": 1 }, "end": { "line": 5, "column": 2 } },
+                "loc": { "start": { "line": 5, "column": 34 }, "end": { "line": 11, "column": 1 } },
+                "line": 5
+            }
+        },
+        "branchMap": {
+            "0": {
+                "loc": { "start": { "line": 11, "column": 3 }, "end": { "line": 11, "column": 88 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 11, "column": 3 }, "end": { "line": 11, "column": 24 } },
+                    { "start": { "line": 11, "column": 29 }, "end": { "line": 11, "column": 87 } }
+                ],
+                "line": 11
+            }
+        },
+        "s": { "0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1 },
+        "f": { "0": 1 },
+        "b": { "0": [1, 1] },
+        "inputSourceMap": {
+            "version": 3,
+            "file": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/models.ts",
+            "sources": [
+                "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/models.ts"
+            ],
+            "names": [],
+            "mappings": ";;;AA+CA,IAAY,qBAMX;AAND,WAAY,qBAAqB;IAC7B,+EAAW,CAAA;IACX,+EAAW,CAAA;IACX,qGAAsB,CAAA;IACtB,yFAAgB,CAAA;IAChB,2EAAS,CAAA;AACb,CAAC,EANW,qBAAqB,qCAArB,qBAAqB,QAMhC",
+            "sourcesContent": [
+                "import { ExecuteCommandParams } from 'vscode-languageserver'\nimport { TransformationJob, TransformationPlan } from '../../client/token/codewhispererbearertokenclient'\n\nexport interface StartTransformRequest extends ExecuteCommandParams {\n    SolutionRootPath: string\n    SelectedProjectPath: string\n    ProgramLanguage: string\n    TargetFramework: string\n    SolutionConfigPaths: string[]\n    ProjectMetadata: TransformProjectMetadata[]\n}\n\nexport interface StartTransformResponse {\n    UploadId: string\n    TransformationJobId: string\n    ArtifactPath: string\n    Error?: string\n    IsSupported?: boolean\n    UnSupportedProjects?: string[]\n    ContainsUnsupportedViews?: boolean\n}\n\nexport interface GetTransformRequest extends ExecuteCommandParams {\n    TransformationJobId: string\n}\n\nexport interface GetTransformResponse {\n    TransformationJob: TransformationJob\n}\n\nexport interface GetTransformPlanRequest extends ExecuteCommandParams {\n    TransformationJobId: string\n}\n\nexport interface GetTransformPlanResponse {\n    TransformationPlan: TransformationPlan\n}\n\nexport interface CancelTransformRequest extends ExecuteCommandParams {\n    TransformationJobId: string\n}\n\nexport interface DownloadArtifactsRequest extends ExecuteCommandParams {\n    TransformationJobId: string\n    SolutionRootPath: string\n}\n\nexport enum CancellationJobStatus {\n    NOT_STARTED,\n    IN_PROGRESS,\n    SUCCESSFULLY_CANCELLED,\n    FAILED_TO_CANCEL,\n    TIMED_OUT,\n}\n\nexport interface CancelTransformResponse {\n    TransformationJobStatus: CancellationJobStatus\n}\n\nexport interface DownloadArtifactsResponse {\n    PathTosave: string\n    Error: string\n}\n\nexport interface RequirementJson {\n    EntryPath: string\n    Projects: Project[]\n}\n\nexport interface ExternalReference {\n    ProjectPath: string\n    RelativePath: string\n    AssemblyFullPath: string\n    IncludedInArtifact: boolean\n}\n\nexport interface TransformProjectMetadata {\n    Name: string\n    ProjectTargetFramework: string\n    ProjectPath: string\n    SourceCodeFilePaths: string[]\n    ProjectLanguage: string\n    ProjectType: string\n    ExternalReferences: ExternalReference[]\n}\n\nexport interface Project {\n    projectFilePath: string\n    codeFiles: CodeFile[]\n    references: References[]\n}\n\nexport interface CodeFile {\n    contentMd5Hash: string\n    relativePath: string\n}\n\nexport interface References {\n    includedInArtifact: boolean\n    relativePath: string\n}\n"
+            ]
+        },
+        "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+        "hash": "32fc3940e7c21c9c88dcf21c64f4729fb2820285",
+        "contentHash": "a98da1425461af3e54d6f67af06e57e52632b0db4c00b1accd6f510c5b338619"
+    },
+    "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/metrics.ts": {
+        "path": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/metrics.ts",
+        "statementMap": {
+            "0": { "start": { "line": 2, "column": 0 }, "end": { "line": 2, "column": 62 } },
+            "1": { "start": { "line": 3, "column": 0 }, "end": { "line": 3, "column": 742 } },
+            "2": { "start": { "line": 4, "column": 16 }, "end": { "line": 4, "column": 35 } },
+            "3": { "start": { "line": 5, "column": 0 }, "end": { "line": 5, "column": 49 } },
+            "4": { "start": { "line": 6, "column": 46 }, "end": { "line": 18, "column": 1 } },
+            "5": { "start": { "line": 7, "column": 17 }, "end": { "line": 12, "column": 5 } },
+            "6": { "start": { "line": 13, "column": 4 }, "end": { "line": 17, "column": 7 } },
+            "7": { "start": { "line": 19, "column": 0 }, "end": { "line": 19, "column": 86 } },
+            "8": { "start": { "line": 20, "column": 44 }, "end": { "line": 37, "column": 1 } },
+            "9": { "start": { "line": 21, "column": 4 }, "end": { "line": 36, "column": 17 } },
+            "10": { "start": { "line": 22, "column": 21 }, "end": { "line": 27, "column": 9 } },
+            "11": { "start": { "line": 28, "column": 8 }, "end": { "line": 34, "column": 11 } },
+            "12": { "start": { "line": 38, "column": 0 }, "end": { "line": 38, "column": 82 } },
+            "13": { "start": { "line": 39, "column": 47 }, "end": { "line": 55, "column": 1 } },
+            "14": { "start": { "line": 40, "column": 17 }, "end": { "line": 49, "column": 5 } },
+            "15": { "start": { "line": 50, "column": 4 }, "end": { "line": 54, "column": 7 } },
+            "16": { "start": { "line": 56, "column": 0 }, "end": { "line": 56, "column": 88 } },
+            "17": { "start": { "line": 57, "column": 45 }, "end": { "line": 70, "column": 1 } },
+            "18": { "start": { "line": 58, "column": 17 }, "end": { "line": 61, "column": 5 } },
+            "19": { "start": { "line": 62, "column": 4 }, "end": { "line": 69, "column": 7 } },
+            "20": { "start": { "line": 71, "column": 0 }, "end": { "line": 71, "column": 84 } },
+            "21": { "start": { "line": 72, "column": 48 }, "end": { "line": 83, "column": 1 } },
+            "22": { "start": { "line": 73, "column": 17 }, "end": { "line": 77, "column": 5 } },
+            "23": { "start": { "line": 78, "column": 4 }, "end": { "line": 82, "column": 7 } },
+            "24": { "start": { "line": 84, "column": 0 }, "end": { "line": 84, "column": 90 } },
+            "25": { "start": { "line": 85, "column": 46 }, "end": { "line": 98, "column": 1 } },
+            "26": { "start": { "line": 86, "column": 17 }, "end": { "line": 89, "column": 5 } },
+            "27": { "start": { "line": 90, "column": 4 }, "end": { "line": 97, "column": 7 } },
+            "28": { "start": { "line": 99, "column": 0 }, "end": { "line": 99, "column": 86 } },
+            "29": { "start": { "line": 100, "column": 45 }, "end": { "line": 116, "column": 1 } },
+            "30": { "start": { "line": 101, "column": 17 }, "end": { "line": 110, "column": 5 } },
+            "31": { "start": { "line": 111, "column": 4 }, "end": { "line": 115, "column": 7 } },
+            "32": { "start": { "line": 117, "column": 0 }, "end": { "line": 117, "column": 84 } },
+            "33": { "start": { "line": 118, "column": 43 }, "end": { "line": 131, "column": 1 } },
+            "34": { "start": { "line": 119, "column": 17 }, "end": { "line": 122, "column": 5 } },
+            "35": { "start": { "line": 123, "column": 4 }, "end": { "line": 130, "column": 7 } },
+            "36": { "start": { "line": 132, "column": 0 }, "end": { "line": 132, "column": 80 } },
+            "37": { "start": { "line": 133, "column": 52 }, "end": { "line": 149, "column": 1 } },
+            "38": { "start": { "line": 134, "column": 17 }, "end": { "line": 143, "column": 5 } },
+            "39": { "start": { "line": 144, "column": 4 }, "end": { "line": 148, "column": 7 } },
+            "40": { "start": { "line": 150, "column": 0 }, "end": { "line": 150, "column": 98 } },
+            "41": { "start": { "line": 151, "column": 50 }, "end": { "line": 164, "column": 1 } },
+            "42": { "start": { "line": 152, "column": 17 }, "end": { "line": 155, "column": 5 } },
+            "43": { "start": { "line": 156, "column": 4 }, "end": { "line": 163, "column": 7 } },
+            "44": { "start": { "line": 165, "column": 0 }, "end": { "line": 165, "column": 94 } },
+            "45": { "start": { "line": 166, "column": 48 }, "end": { "line": 177, "column": 1 } },
+            "46": { "start": { "line": 167, "column": 17 }, "end": { "line": 171, "column": 5 } },
+            "47": { "start": { "line": 172, "column": 4 }, "end": { "line": 176, "column": 7 } },
+            "48": { "start": { "line": 178, "column": 0 }, "end": { "line": 178, "column": 90 } },
+            "49": { "start": { "line": 179, "column": 46 }, "end": { "line": 192, "column": 1 } },
+            "50": { "start": { "line": 180, "column": 17 }, "end": { "line": 183, "column": 5 } },
+            "51": { "start": { "line": 184, "column": 4 }, "end": { "line": 191, "column": 7 } },
+            "52": { "start": { "line": 193, "column": 0 }, "end": { "line": 193, "column": 86 } },
+            "53": { "start": { "line": 194, "column": 58 }, "end": { "line": 205, "column": 1 } },
+            "54": { "start": { "line": 195, "column": 17 }, "end": { "line": 199, "column": 5 } },
+            "55": { "start": { "line": 200, "column": 4 }, "end": { "line": 204, "column": 7 } },
+            "56": { "start": { "line": 206, "column": 0 }, "end": { "line": 206, "column": 110 } },
+            "57": { "start": { "line": 207, "column": 56 }, "end": { "line": 220, "column": 1 } },
+            "58": { "start": { "line": 208, "column": 17 }, "end": { "line": 211, "column": 5 } },
+            "59": { "start": { "line": 212, "column": 4 }, "end": { "line": 219, "column": 7 } },
+            "60": { "start": { "line": 221, "column": 0 }, "end": { "line": 221, "column": 106 } }
+        },
+        "fnMap": {
+            "0": {
+                "name": "(anonymous_0)",
+                "decl": { "start": { "line": 6, "column": 46 }, "end": { "line": 6, "column": 47 } },
+                "loc": { "start": { "line": 6, "column": 71 }, "end": { "line": 18, "column": 1 } },
+                "line": 6
+            },
+            "1": {
+                "name": "(anonymous_1)",
+                "decl": { "start": { "line": 20, "column": 44 }, "end": { "line": 20, "column": 45 } },
+                "loc": { "start": { "line": 20, "column": 75 }, "end": { "line": 37, "column": 1 } },
+                "line": 20
+            },
+            "2": {
+                "name": "(anonymous_2)",
+                "decl": { "start": { "line": 39, "column": 47 }, "end": { "line": 39, "column": 48 } },
+                "loc": { "start": { "line": 39, "column": 72 }, "end": { "line": 55, "column": 1 } },
+                "line": 39
+            },
+            "3": {
+                "name": "(anonymous_3)",
+                "decl": { "start": { "line": 57, "column": 45 }, "end": { "line": 57, "column": 46 } },
+                "loc": { "start": { "line": 57, "column": 76 }, "end": { "line": 70, "column": 1 } },
+                "line": 57
+            },
+            "4": {
+                "name": "(anonymous_4)",
+                "decl": { "start": { "line": 72, "column": 48 }, "end": { "line": 72, "column": 49 } },
+                "loc": { "start": { "line": 72, "column": 80 }, "end": { "line": 83, "column": 1 } },
+                "line": 72
+            },
+            "5": {
+                "name": "(anonymous_5)",
+                "decl": { "start": { "line": 85, "column": 46 }, "end": { "line": 85, "column": 47 } },
+                "loc": { "start": { "line": 85, "column": 77 }, "end": { "line": 98, "column": 1 } },
+                "line": 85
+            },
+            "6": {
+                "name": "(anonymous_6)",
+                "decl": { "start": { "line": 100, "column": 45 }, "end": { "line": 100, "column": 46 } },
+                "loc": { "start": { "line": 100, "column": 70 }, "end": { "line": 116, "column": 1 } },
+                "line": 100
+            },
+            "7": {
+                "name": "(anonymous_7)",
+                "decl": { "start": { "line": 118, "column": 43 }, "end": { "line": 118, "column": 44 } },
+                "loc": { "start": { "line": 118, "column": 74 }, "end": { "line": 131, "column": 1 } },
+                "line": 118
+            },
+            "8": {
+                "name": "(anonymous_8)",
+                "decl": { "start": { "line": 133, "column": 52 }, "end": { "line": 133, "column": 53 } },
+                "loc": { "start": { "line": 133, "column": 77 }, "end": { "line": 149, "column": 1 } },
+                "line": 133
+            },
+            "9": {
+                "name": "(anonymous_9)",
+                "decl": { "start": { "line": 151, "column": 50 }, "end": { "line": 151, "column": 51 } },
+                "loc": { "start": { "line": 151, "column": 81 }, "end": { "line": 164, "column": 1 } },
+                "line": 151
+            },
+            "10": {
+                "name": "(anonymous_10)",
+                "decl": { "start": { "line": 166, "column": 48 }, "end": { "line": 166, "column": 49 } },
+                "loc": { "start": { "line": 166, "column": 80 }, "end": { "line": 177, "column": 1 } },
+                "line": 166
+            },
+            "11": {
+                "name": "(anonymous_11)",
+                "decl": { "start": { "line": 179, "column": 46 }, "end": { "line": 179, "column": 47 } },
+                "loc": { "start": { "line": 179, "column": 77 }, "end": { "line": 192, "column": 1 } },
+                "line": 179
+            },
+            "12": {
+                "name": "(anonymous_12)",
+                "decl": { "start": { "line": 194, "column": 58 }, "end": { "line": 194, "column": 59 } },
+                "loc": { "start": { "line": 194, "column": 90 }, "end": { "line": 205, "column": 1 } },
+                "line": 194
+            },
+            "13": {
+                "name": "(anonymous_13)",
+                "decl": { "start": { "line": 207, "column": 56 }, "end": { "line": 207, "column": 57 } },
+                "loc": { "start": { "line": 207, "column": 87 }, "end": { "line": 220, "column": 1 } },
+                "line": 207
+            }
+        },
+        "branchMap": {
+            "0": {
+                "loc": { "start": { "line": 32, "column": 24 }, "end": { "line": 32, "column": 55 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 32, "column": 24 }, "end": { "line": 32, "column": 37 } },
+                    { "start": { "line": 32, "column": 41 }, "end": { "line": 32, "column": 55 } }
+                ],
+                "line": 32
+            },
+            "1": {
+                "loc": { "start": { "line": 67, "column": 20 }, "end": { "line": 67, "column": 51 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 67, "column": 20 }, "end": { "line": 67, "column": 33 } },
+                    { "start": { "line": 67, "column": 37 }, "end": { "line": 67, "column": 51 } }
+                ],
+                "line": 67
+            },
+            "2": {
+                "loc": { "start": { "line": 95, "column": 20 }, "end": { "line": 95, "column": 51 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 95, "column": 20 }, "end": { "line": 95, "column": 33 } },
+                    { "start": { "line": 95, "column": 37 }, "end": { "line": 95, "column": 51 } }
+                ],
+                "line": 95
+            },
+            "3": {
+                "loc": { "start": { "line": 128, "column": 20 }, "end": { "line": 128, "column": 51 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 128, "column": 20 }, "end": { "line": 128, "column": 33 } },
+                    { "start": { "line": 128, "column": 37 }, "end": { "line": 128, "column": 51 } }
+                ],
+                "line": 128
+            },
+            "4": {
+                "loc": { "start": { "line": 161, "column": 20 }, "end": { "line": 161, "column": 51 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 161, "column": 20 }, "end": { "line": 161, "column": 33 } },
+                    { "start": { "line": 161, "column": 37 }, "end": { "line": 161, "column": 51 } }
+                ],
+                "line": 161
+            },
+            "5": {
+                "loc": { "start": { "line": 189, "column": 20 }, "end": { "line": 189, "column": 51 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 189, "column": 20 }, "end": { "line": 189, "column": 33 } },
+                    { "start": { "line": 189, "column": 37 }, "end": { "line": 189, "column": 51 } }
+                ],
+                "line": 189
+            },
+            "6": {
+                "loc": { "start": { "line": 217, "column": 20 }, "end": { "line": 217, "column": 51 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 217, "column": 20 }, "end": { "line": 217, "column": 33 } },
+                    { "start": { "line": 217, "column": 37 }, "end": { "line": 217, "column": 51 } }
+                ],
+                "line": 217
+            }
+        },
+        "s": {
+            "0": 1,
+            "1": 1,
+            "2": 1,
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 1,
+            "8": 1,
+            "9": 3,
+            "10": 3,
+            "11": 3,
+            "12": 1,
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "18": 2,
+            "19": 2,
+            "20": 1,
+            "21": 1,
+            "22": 1,
+            "23": 1,
+            "24": 1,
+            "25": 1,
+            "26": 2,
+            "27": 2,
+            "28": 1,
+            "29": 1,
+            "30": 1,
+            "31": 1,
+            "32": 1,
+            "33": 1,
+            "34": 2,
+            "35": 2,
+            "36": 1,
+            "37": 1,
+            "38": 1,
+            "39": 1,
+            "40": 1,
+            "41": 1,
+            "42": 2,
+            "43": 2,
+            "44": 1,
+            "45": 1,
+            "46": 1,
+            "47": 1,
+            "48": 1,
+            "49": 1,
+            "50": 2,
+            "51": 2,
+            "52": 1,
+            "53": 1,
+            "54": 1,
+            "55": 1,
+            "56": 1,
+            "57": 1,
+            "58": 2,
+            "59": 2,
+            "60": 1
+        },
+        "f": {
+            "0": 1,
+            "1": 3,
+            "2": 1,
+            "3": 2,
+            "4": 1,
+            "5": 2,
+            "6": 1,
+            "7": 2,
+            "8": 1,
+            "9": 2,
+            "10": 1,
+            "11": 2,
+            "12": 1,
+            "13": 2
+        },
+        "b": { "0": [3, 2], "1": [2, 1], "2": [2, 1], "3": [2, 1], "4": [2, 1], "5": [2, 1], "6": [2, 1] },
+        "inputSourceMap": {
+            "version": 3,
+            "file": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/metrics.ts",
+            "sources": [
+                "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/netTransform/metrics.ts"
+            ],
+            "names": [],
+            "mappings": "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",
+            "sourcesContent": [
+                "import { Logging, Telemetry } from '@aws/language-server-runtimes/server-interface'\nimport { TransformationSpec } from '../../client/token/codewhispererbearertokenclient'\nimport {\n    CancelTransformRequest,\n    CancelTransformResponse,\n    DownloadArtifactsRequest,\n    DownloadArtifactsResponse,\n    GetTransformPlanRequest,\n    GetTransformPlanResponse,\n    GetTransformRequest,\n    GetTransformResponse,\n    StartTransformRequest,\n    StartTransformResponse,\n} from './models'\nimport {\n    TransformationFailureEvent,\n    TransformationJobArtifactsDownloadedEvent,\n    TransformationJobCancelledEvent,\n    TransformationJobReceivedEvent,\n    TransformationJobStartedEvent,\n    TransformationPlanReceivedEvent,\n} from '../telemetry/types'\nimport { flattenMetric } from '../utils'\n\nexport const CODETRANSFORM_CATEGORY = 'codeTransform'\n\nexport const emitTransformationJobStartedTelemetry = (telemetry: Telemetry, response: StartTransformResponse) => {\n    const data: TransformationJobStartedEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: response.TransformationJobId,\n        uploadId: response.UploadId,\n        error: response.Error as string,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsStartedByUser',\n        result: 'Succeeded',\n        data: flattenMetric(data),\n    })\n}\n\nexport const emitTransformationJobStartedFailure = (\n    telemetry: Telemetry,\n    request: StartTransformRequest,\n    error: Error\n) => {\n    try {\n        const data: TransformationFailureEvent = {\n            category: CODETRANSFORM_CATEGORY,\n            programLanguage: request.ProgramLanguage,\n            selectedProjectPath: request.SelectedProjectPath,\n            targetFramework: request.TargetFramework,\n        }\n\n        telemetry.emitMetric({\n            name: 'codeTransform_jobIsStartedByUser',\n            result: 'Failed',\n            errorData: {\n                reason: error.message || 'UnknownError',\n            },\n        })\n    } catch (e: any) {}\n}\n\nexport const emitTransformationJobReceivedTelemetry = (telemetry: Telemetry, response: GetTransformResponse) => {\n    const data: TransformationJobReceivedEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: response.TransformationJob?.jobId as string,\n        transformationJobStatus: response.TransformationJob?.status as string,\n        creationTime: response.TransformationJob?.creationTime as Date,\n        startExecutionTime: response.TransformationJob?.startExecutionTime as Date,\n        endExecutionTime: response.TransformationJob?.endExecutionTime as Date,\n        reason: response.TransformationJob?.reason as string,\n        transformationSpec: response.TransformationJob?.transformationSpec as TransformationSpec,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsReceivedByUser',\n        result: 'Succeeded',\n        data: flattenMetric(data),\n    })\n}\n\nexport const emitTransformationJobReceivedFailure = (\n    telemetry: Telemetry,\n    request: GetTransformRequest,\n    error: Error\n) => {\n    const data: TransformationFailureEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: request.TransformationJobId,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsReceivedByUser',\n        result: 'Failed',\n        data,\n        errorData: {\n            reason: error.message || 'UnknownError',\n        },\n    })\n}\n\nexport const emitTransformationJobCancelledTelemetry = (\n    telemetry: Telemetry,\n    response: CancelTransformResponse,\n    jobId: string\n) => {\n    const data: TransformationJobCancelledEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: jobId,\n        cancellationJobStatus: response.TransformationJobStatus,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsCancelledByUser',\n        result: 'Succeeded',\n        data: flattenMetric(data),\n    })\n}\n\nexport const emitTransformationJobCancelledFailure = (\n    telemetry: Telemetry,\n    request: CancelTransformRequest,\n    error: Error\n) => {\n    const data: TransformationFailureEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: request.TransformationJobId,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsCancelledByUser',\n        result: 'Failed',\n        data,\n        errorData: {\n            reason: error.message || 'UnknownError',\n        },\n    })\n}\n\nexport const emitTransformationJobPolledTelemetry = (telemetry: Telemetry, response: GetTransformResponse) => {\n    const data: TransformationJobReceivedEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: response.TransformationJob?.jobId as string,\n        transformationJobStatus: response.TransformationJob?.status as string,\n        creationTime: response.TransformationJob?.creationTime as Date,\n        startExecutionTime: response.TransformationJob?.startExecutionTime as Date,\n        endExecutionTime: response.TransformationJob?.endExecutionTime as Date,\n        reason: response.TransformationJob?.reason as string,\n        transformationSpec: response.TransformationJob?.transformationSpec as TransformationSpec,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsPolledByUser',\n        result: 'Succeeded',\n        data: flattenMetric(data),\n    })\n}\n\nexport const emitTransformationJobPolledFailure = (\n    telemetry: Telemetry,\n    request: GetTransformRequest,\n    error: Error\n) => {\n    const data: TransformationFailureEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: request.TransformationJobId,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsPolledByUser',\n        result: 'Failed',\n        data,\n        errorData: {\n            reason: error.message || 'UnknownError',\n        },\n    })\n}\n\nexport const emitTransformationJobPolledForPlanTelemetry = (telemetry: Telemetry, response: GetTransformResponse) => {\n    const data: TransformationJobReceivedEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: response.TransformationJob?.jobId as string,\n        transformationJobStatus: response.TransformationJob?.status as string,\n        creationTime: response.TransformationJob?.creationTime as Date,\n        startExecutionTime: response.TransformationJob?.startExecutionTime as Date,\n        endExecutionTime: response.TransformationJob?.endExecutionTime as Date,\n        reason: response.TransformationJob?.reason as string,\n        transformationSpec: response.TransformationJob?.transformationSpec as TransformationSpec,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsPolledForPlanByUser',\n        result: 'Succeeded',\n        data: flattenMetric(data),\n    })\n}\n\nexport const emitTransformationJobPolledForPlanFailure = (\n    telemetry: Telemetry,\n    request: GetTransformRequest,\n    error: Error\n) => {\n    const data: TransformationFailureEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: request.TransformationJobId,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_jobIsPolledForPlanByUser',\n        result: 'Failed',\n        data,\n        errorData: {\n            reason: error.message || 'UnknownError',\n        },\n    })\n}\n\nexport const emitTransformationPlanReceivedTelemetry = (\n    telemetry: Telemetry,\n    response: GetTransformPlanResponse,\n    jobId: string\n) => {\n    const data: TransformationPlanReceivedEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: jobId as string,\n        transformationSteps: response.TransformationPlan.transformationSteps,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_planIsReceivedByUser',\n        result: 'Succeeded',\n        data: flattenMetric(data),\n    })\n}\n\nexport const emitTransformationPlanReceivedFailure = (\n    telemetry: Telemetry,\n    request: GetTransformPlanRequest,\n    error: Error\n) => {\n    const data: TransformationFailureEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: request.TransformationJobId,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_planIsReceivedByUser',\n        result: 'Failed',\n        data,\n        errorData: {\n            reason: error.message || 'UnknownError',\n        },\n    })\n}\n\nexport const emitTransformationJobArtifactsDownloadedTelemetry = (\n    telemetry: Telemetry,\n    response: DownloadArtifactsResponse,\n    jobId: string\n) => {\n    const data: TransformationJobArtifactsDownloadedEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: jobId,\n        error: response.Error,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_artifactsAreDownloadedByUser',\n        result: 'Succeeded',\n        data: flattenMetric(data),\n    })\n}\n\nexport const emitTransformationJobArtifactsDownloadedFailure = (\n    telemetry: Telemetry,\n    request: DownloadArtifactsRequest,\n    error: Error\n) => {\n    const data: TransformationFailureEvent = {\n        category: CODETRANSFORM_CATEGORY,\n        transformationJobId: request.TransformationJobId,\n    }\n\n    telemetry.emitMetric({\n        name: 'codeTransform_artifactsAreDownloadedByUser',\n        result: 'Failed',\n        data,\n        errorData: {\n            reason: error.message || 'UnknownError',\n        },\n    })\n}\n"
+            ]
+        },
+        "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+        "hash": "0b93991bd295c7f5cf6feedf56d7b91de6e71a52",
+        "contentHash": "7faf1f4b35e4942c2cbb8bce74e352bc27308b4112d6f214fc78cb44c23a1136"
+    },
+    "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/utils.ts": {
+        "path": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/utils.ts",
+        "statementMap": {
+            "0": { "start": { "line": 2, "column": 0 }, "end": { "line": 2, "column": 62 } },
+            "1": { "start": { "line": 3, "column": 0 }, "end": { "line": 3, "column": 31 } },
+            "2": { "start": { "line": 4, "column": 0 }, "end": { "line": 4, "column": 32 } },
+            "3": { "start": { "line": 5, "column": 0 }, "end": { "line": 5, "column": 28 } },
+            "4": { "start": { "line": 6, "column": 0 }, "end": { "line": 6, "column": 30 } },
+            "5": { "start": { "line": 7, "column": 0 }, "end": { "line": 7, "column": 46 } },
+            "6": { "start": { "line": 8, "column": 0 }, "end": { "line": 8, "column": 30 } },
+            "7": { "start": { "line": 9, "column": 0 }, "end": { "line": 9, "column": 42 } },
+            "8": { "start": { "line": 10, "column": 0 }, "end": { "line": 10, "column": 50 } },
+            "9": { "start": { "line": 11, "column": 0 }, "end": { "line": 11, "column": 60 } },
+            "10": { "start": { "line": 12, "column": 0 }, "end": { "line": 12, "column": 64 } },
+            "11": { "start": { "line": 14, "column": 4 }, "end": { "line": 16, "column": 5 } },
+            "12": { "start": { "line": 15, "column": 8 }, "end": { "line": 15, "column": 21 } },
+            "13": { "start": { "line": 17, "column": 4 }, "end": { "line": 17, "column": 70 } },
+            "14": { "start": { "line": 20, "column": 4 }, "end": { "line": 20, "column": 42 } },
+            "15": { "start": { "line": 23, "column": 4 }, "end": { "line": 23, "column": 38 } },
+            "16": { "start": { "line": 26, "column": 4 }, "end": { "line": 26, "column": 55 } },
+            "17": { "start": { "line": 29, "column": 4 }, "end": { "line": 29, "column": 49 } },
+            "18": { "start": { "line": 32, "column": 26 }, "end": { "line": 32, "column": 98 } },
+            "19": { "start": { "line": 32, "column": 72 }, "end": { "line": 32, "column": 90 } },
+            "20": { "start": { "line": 33, "column": 4 }, "end": { "line": 33, "column": 48 } },
+            "21": { "start": { "line": 36, "column": 4 }, "end": { "line": 41, "column": 5 } },
+            "22": { "start": { "line": 37, "column": 8 }, "end": { "line": 37, "column": 38 } },
+            "23": { "start": { "line": 40, "column": 8 }, "end": { "line": 40, "column": 69 } },
+            "24": { "start": { "line": 44, "column": 4 }, "end": { "line": 46, "column": 5 } },
+            "25": { "start": { "line": 45, "column": 8 }, "end": { "line": 45, "column": 29 } },
+            "26": { "start": { "line": 47, "column": 4 }, "end": { "line": 47, "column": 25 } },
+            "27": { "start": { "line": 49, "column": 35 }, "end": { "line": 49, "column": 95 } },
+            "28": { "start": { "line": 50, "column": 22 }, "end": { "line": 50, "column": 76 } },
+            "29": { "start": { "line": 51, "column": 35 }, "end": { "line": 51, "column": 77 } },
+            "30": { "start": { "line": 52, "column": 35 }, "end": { "line": 65, "column": 1 } },
+            "31": { "start": { "line": 54, "column": 24 }, "end": { "line": 54, "column": 74 } },
+            "32": { "start": { "line": 58, "column": 24 }, "end": { "line": 58, "column": 61 } },
+            "33": { "start": { "line": 62, "column": 24 }, "end": { "line": 62, "column": 74 } },
+            "34": { "start": { "line": 67, "column": 4 }, "end": { "line": 69, "column": 20 } },
+            "35": { "start": { "line": 68, "column": 56 }, "end": { "line": 68, "column": 77 } },
+            "36": { "start": { "line": 73, "column": 4 }, "end": { "line": 84, "column": 5 } },
+            "37": { "start": { "line": 75, "column": 12 }, "end": { "line": 75, "column": 38 } },
+            "38": { "start": { "line": 76, "column": 12 }, "end": { "line": 76, "column": 18 } },
+            "39": { "start": { "line": 79, "column": 12 }, "end": { "line": 79, "column": 41 } },
+            "40": { "start": { "line": 80, "column": 12 }, "end": { "line": 80, "column": 18 } },
+            "41": { "start": { "line": 82, "column": 12 }, "end": { "line": 82, "column": 41 } },
+            "42": { "start": { "line": 83, "column": 12 }, "end": { "line": 83, "column": 18 } },
+            "43": { "start": { "line": 85, "column": 4 }, "end": { "line": 91, "column": 6 } },
+            "44": { "start": { "line": 94, "column": 4 }, "end": { "line": 96, "column": 5 } },
+            "45": { "start": { "line": 95, "column": 8 }, "end": { "line": 95, "column": 52 } },
+            "46": { "start": { "line": 97, "column": 24 }, "end": { "line": 97, "column": 68 } },
+            "47": { "start": { "line": 98, "column": 4 }, "end": { "line": 100, "column": 5 } },
+            "48": { "start": { "line": 99, "column": 8 }, "end": { "line": 99, "column": 52 } },
+            "49": { "start": { "line": 101, "column": 4 }, "end": { "line": 101, "column": 29 } },
+            "50": { "start": { "line": 103, "column": 22 }, "end": { "line": 118, "column": 1 } },
+            "51": { "start": { "line": 104, "column": 22 }, "end": { "line": 104, "column": 24 } },
+            "52": { "start": { "line": 105, "column": 4 }, "end": { "line": 116, "column": 7 } },
+            "53": { "start": { "line": 106, "column": 22 }, "end": { "line": 106, "column": 30 } },
+            "54": { "start": { "line": 107, "column": 8 }, "end": { "line": 109, "column": 9 } },
+            "55": { "start": { "line": 108, "column": 12 }, "end": { "line": 108, "column": 28 } },
+            "56": { "start": { "line": 110, "column": 8 }, "end": { "line": 115, "column": 9 } },
+            "57": { "start": { "line": 111, "column": 12 }, "end": { "line": 111, "column": 86 } },
+            "58": { "start": { "line": 114, "column": 12 }, "end": { "line": 114, "column": 44 } },
+            "59": { "start": { "line": 117, "column": 4 }, "end": { "line": 117, "column": 21 } },
+            "60": { "start": { "line": 119, "column": 0 }, "end": { "line": 119, "column": 38 } }
+        },
+        "fnMap": {
+            "0": {
+                "name": "isAwsError",
+                "decl": { "start": { "line": 13, "column": 9 }, "end": { "line": 13, "column": 19 } },
+                "loc": { "start": { "line": 13, "column": 27 }, "end": { "line": 18, "column": 1 } },
+                "line": 13
+            },
+            "1": {
+                "name": "hasCode",
+                "decl": { "start": { "line": 19, "column": 9 }, "end": { "line": 19, "column": 16 } },
+                "loc": { "start": { "line": 19, "column": 24 }, "end": { "line": 21, "column": 1 } },
+                "line": 19
+            },
+            "2": {
+                "name": "hasTime",
+                "decl": { "start": { "line": 22, "column": 9 }, "end": { "line": 22, "column": 16 } },
+                "loc": { "start": { "line": 22, "column": 24 }, "end": { "line": 24, "column": 1 } },
+                "line": 22
+            },
+            "3": {
+                "name": "isObject",
+                "decl": { "start": { "line": 25, "column": 9 }, "end": { "line": 25, "column": 17 } },
+                "loc": { "start": { "line": 25, "column": 25 }, "end": { "line": 27, "column": 1 } },
+                "line": 25
+            },
+            "4": {
+                "name": "isNullish",
+                "decl": { "start": { "line": 28, "column": 9 }, "end": { "line": 28, "column": 18 } },
+                "loc": { "start": { "line": 28, "column": 26 }, "end": { "line": 30, "column": 1 } },
+                "line": 28
+            },
+            "5": {
+                "name": "getCompletionType",
+                "decl": { "start": { "line": 31, "column": 9 }, "end": { "line": 31, "column": 26 } },
+                "loc": { "start": { "line": 31, "column": 39 }, "end": { "line": 34, "column": 1 } },
+                "line": 31
+            },
+            "6": {
+                "name": "(anonymous_6)",
+                "decl": { "start": { "line": 32, "column": 64 }, "end": { "line": 32, "column": 65 } },
+                "loc": { "start": { "line": 32, "column": 72 }, "end": { "line": 32, "column": 90 } },
+                "line": 32
+            },
+            "7": {
+                "name": "parseJson",
+                "decl": { "start": { "line": 35, "column": 9 }, "end": { "line": 35, "column": 18 } },
+                "loc": { "start": { "line": 35, "column": 31 }, "end": { "line": 42, "column": 1 } },
+                "line": 35
+            },
+            "8": {
+                "name": "getErrorMessage",
+                "decl": { "start": { "line": 43, "column": 9 }, "end": { "line": 43, "column": 24 } },
+                "loc": { "start": { "line": 43, "column": 32 }, "end": { "line": 48, "column": 1 } },
+                "line": 43
+            },
+            "9": {
+                "name": "(anonymous_9)",
+                "decl": { "start": { "line": 54, "column": 15 }, "end": { "line": 54, "column": 16 } },
+                "loc": { "start": { "line": 54, "column": 24 }, "end": { "line": 54, "column": 74 } },
+                "line": 54
+            },
+            "10": {
+                "name": "(anonymous_10)",
+                "decl": { "start": { "line": 58, "column": 15 }, "end": { "line": 58, "column": 16 } },
+                "loc": { "start": { "line": 58, "column": 24 }, "end": { "line": 58, "column": 61 } },
+                "line": 58
+            },
+            "11": {
+                "name": "(anonymous_11)",
+                "decl": { "start": { "line": 62, "column": 15 }, "end": { "line": 62, "column": 16 } },
+                "loc": { "start": { "line": 62, "column": 24 }, "end": { "line": 62, "column": 74 } },
+                "line": 62
+            },
+            "12": {
+                "name": "getAuthFollowUpType",
+                "decl": { "start": { "line": 66, "column": 9 }, "end": { "line": 66, "column": 28 } },
+                "loc": { "start": { "line": 66, "column": 34 }, "end": { "line": 70, "column": 1 } },
+                "line": 66
+            },
+            "13": {
+                "name": "(anonymous_13)",
+                "decl": { "start": { "line": 68, "column": 42 }, "end": { "line": 68, "column": 43 } },
+                "loc": { "start": { "line": 68, "column": 56 }, "end": { "line": 68, "column": 77 } },
+                "line": 68
+            },
+            "14": {
+                "name": "createAuthFollowUpResult",
+                "decl": { "start": { "line": 71, "column": 9 }, "end": { "line": 71, "column": 33 } },
+                "loc": { "start": { "line": 71, "column": 44 }, "end": { "line": 92, "column": 1 } },
+                "line": 71
+            },
+            "15": {
+                "name": "getBearerTokenFromProvider",
+                "decl": { "start": { "line": 93, "column": 9 }, "end": { "line": 93, "column": 35 } },
+                "loc": { "start": { "line": 93, "column": 57 }, "end": { "line": 102, "column": 1 } },
+                "line": 93
+            },
+            "16": {
+                "name": "(anonymous_16)",
+                "decl": { "start": { "line": 103, "column": 22 }, "end": { "line": 103, "column": 23 } },
+                "loc": { "start": { "line": 103, "column": 44 }, "end": { "line": 118, "column": 1 } },
+                "line": 103
+            },
+            "17": {
+                "name": "(anonymous_17)",
+                "decl": { "start": { "line": 105, "column": 29 }, "end": { "line": 105, "column": 30 } },
+                "loc": { "start": { "line": 105, "column": 36 }, "end": { "line": 116, "column": 5 } },
+                "line": 105
+            }
+        },
+        "branchMap": {
+            "0": {
+                "loc": { "start": { "line": 14, "column": 4 }, "end": { "line": 16, "column": 5 } },
+                "type": "if",
+                "locations": [
+                    { "start": { "line": 14, "column": 4 }, "end": { "line": 16, "column": 5 } },
+                    { "start": {}, "end": {} }
+                ],
+                "line": 14
+            },
+            "1": {
+                "loc": { "start": { "line": 17, "column": 11 }, "end": { "line": 17, "column": 69 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 17, "column": 11 }, "end": { "line": 17, "column": 33 } },
+                    { "start": { "line": 17, "column": 37 }, "end": { "line": 17, "column": 51 } },
+                    { "start": { "line": 17, "column": 55 }, "end": { "line": 17, "column": 69 } }
+                ],
+                "line": 17
+            },
+            "2": {
+                "loc": { "start": { "line": 26, "column": 11 }, "end": { "line": 26, "column": 54 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 26, "column": 11 }, "end": { "line": 26, "column": 25 } },
+                    { "start": { "line": 26, "column": 29 }, "end": { "line": 26, "column": 54 } }
+                ],
+                "line": 26
+            },
+            "3": {
+                "loc": { "start": { "line": 29, "column": 11 }, "end": { "line": 29, "column": 48 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 29, "column": 11 }, "end": { "line": 29, "column": 25 } },
+                    { "start": { "line": 29, "column": 29 }, "end": { "line": 29, "column": 48 } }
+                ],
+                "line": 29
+            },
+            "4": {
+                "loc": { "start": { "line": 33, "column": 11 }, "end": { "line": 33, "column": 47 } },
+                "type": "cond-expr",
+                "locations": [
+                    { "start": { "line": 33, "column": 31 }, "end": { "line": 33, "column": 38 } },
+                    { "start": { "line": 33, "column": 41 }, "end": { "line": 33, "column": 47 } }
+                ],
+                "line": 33
+            },
+            "5": {
+                "loc": { "start": { "line": 44, "column": 4 }, "end": { "line": 46, "column": 5 } },
+                "type": "if",
+                "locations": [
+                    { "start": { "line": 44, "column": 4 }, "end": { "line": 46, "column": 5 } },
+                    { "start": {}, "end": {} }
+                ],
+                "line": 44
+            },
+            "6": {
+                "loc": { "start": { "line": 67, "column": 11 }, "end": { "line": 69, "column": 19 } },
+                "type": "cond-expr",
+                "locations": [
+                    { "start": { "line": 68, "column": 10 }, "end": { "line": 68, "column": 94 } },
+                    { "start": { "line": 69, "column": 10 }, "end": { "line": 69, "column": 19 } }
+                ],
+                "line": 67
+            },
+            "7": {
+                "loc": { "start": { "line": 73, "column": 4 }, "end": { "line": 84, "column": 5 } },
+                "type": "switch",
+                "locations": [
+                    { "start": { "line": 74, "column": 8 }, "end": { "line": 76, "column": 18 } },
+                    { "start": { "line": 77, "column": 8 }, "end": { "line": 77, "column": 34 } },
+                    { "start": { "line": 78, "column": 8 }, "end": { "line": 80, "column": 18 } },
+                    { "start": { "line": 81, "column": 8 }, "end": { "line": 83, "column": 18 } }
+                ],
+                "line": 73
+            },
+            "8": {
+                "loc": { "start": { "line": 94, "column": 4 }, "end": { "line": 96, "column": 5 } },
+                "type": "if",
+                "locations": [
+                    { "start": { "line": 94, "column": 4 }, "end": { "line": 96, "column": 5 } },
+                    { "start": {}, "end": {} }
+                ],
+                "line": 94
+            },
+            "9": {
+                "loc": { "start": { "line": 98, "column": 4 }, "end": { "line": 100, "column": 5 } },
+                "type": "if",
+                "locations": [
+                    { "start": { "line": 98, "column": 4 }, "end": { "line": 100, "column": 5 } },
+                    { "start": {}, "end": {} }
+                ],
+                "line": 98
+            },
+            "10": {
+                "loc": { "start": { "line": 103, "column": 28 }, "end": { "line": 103, "column": 39 } },
+                "type": "default-arg",
+                "locations": [{ "start": { "line": 103, "column": 37 }, "end": { "line": 103, "column": 39 } }],
+                "line": 103
+            },
+            "11": {
+                "loc": { "start": { "line": 107, "column": 8 }, "end": { "line": 109, "column": 9 } },
+                "type": "if",
+                "locations": [
+                    { "start": { "line": 107, "column": 8 }, "end": { "line": 109, "column": 9 } },
+                    { "start": {}, "end": {} }
+                ],
+                "line": 107
+            },
+            "12": {
+                "loc": { "start": { "line": 110, "column": 8 }, "end": { "line": 115, "column": 9 } },
+                "type": "if",
+                "locations": [
+                    { "start": { "line": 110, "column": 8 }, "end": { "line": 115, "column": 9 } },
+                    { "start": { "line": 113, "column": 13 }, "end": { "line": 115, "column": 9 } }
+                ],
+                "line": 110
+            },
+            "13": {
+                "loc": { "start": { "line": 110, "column": 12 }, "end": { "line": 110, "column": 55 } },
+                "type": "binary-expr",
+                "locations": [
+                    { "start": { "line": 110, "column": 12 }, "end": { "line": 110, "column": 37 } },
+                    { "start": { "line": 110, "column": 41 }, "end": { "line": 110, "column": 55 } }
+                ],
+                "line": 110
+            }
+        },
+        "s": {
+            "0": 1,
+            "1": 1,
+            "2": 1,
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 1,
+            "8": 1,
+            "9": 1,
+            "10": 1,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 1,
+            "28": 1,
+            "29": 1,
+            "30": 1,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 1,
+            "51": 40,
+            "52": 40,
+            "53": 80,
+            "54": 80,
+            "55": 6,
+            "56": 80,
+            "57": 26,
+            "58": 54,
+            "59": 40,
+            "60": 1
+        },
+        "f": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 40,
+            "17": 80
+        },
+        "b": {
+            "0": [0, 0],
+            "1": [0, 0, 0],
+            "2": [0, 0],
+            "3": [0, 0],
+            "4": [0, 0],
+            "5": [0, 0],
+            "6": [0, 0],
+            "7": [0, 0, 0, 0],
+            "8": [0, 0],
+            "9": [0, 0],
+            "10": [14],
+            "11": [6, 74],
+            "12": [26, 54],
+            "13": [80, 26]
+        },
+        "inputSourceMap": {
+            "version": 3,
+            "file": "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/utils.ts",
+            "sources": [
+                "/Users/zhenganp/Desktop/Work/OpenSource/language-servers-staging/server/aws-lsp-codewhisperer/src/language-server/utils.ts"
+            ],
+            "names": [],
+            "mappings": "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",
+            "sourcesContent": [
+                "import { BearerCredentials, CredentialsProvider } from '@aws/language-server-runtimes/server-interface'\nimport { AWSError } from 'aws-sdk'\nimport { Suggestion } from './codeWhispererService'\nimport { CodewhispererCompletionType } from './telemetry/types'\nimport { ChatResult } from '@aws/language-server-runtimes/protocol'\n\nexport function isAwsError(error: unknown): error is AWSError {\n    if (error === undefined) {\n        return false\n    }\n\n    return error instanceof Error && hasCode(error) && hasTime(error)\n}\n\nfunction hasCode<T>(error: T): error is T & { code: string } {\n    return typeof (error as { code?: unknown }).code === 'string'\n}\n\nfunction hasTime(error: Error): error is typeof error & { time: Date } {\n    return (error as { time?: unknown }).time instanceof Date\n}\n\nexport function isObject(value: unknown): value is { [key: number | string | symbol]: any } {\n    return Boolean(value) && typeof value === 'object'\n}\n\nexport function isNullish(value: unknown): value is null | undefined {\n    return value === null || value === undefined\n}\n\nexport function getCompletionType(suggestion: Suggestion): CodewhispererCompletionType {\n    const nonBlankLines = suggestion.content.split('\\n').filter(line => line.trim() !== '').length\n\n    return nonBlankLines > 1 ? 'Block' : 'Line'\n}\n\nexport function parseJson(jsonString: string) {\n    try {\n        return JSON.parse(jsonString)\n    } catch {\n        throw new Error(`error while parsing string: ${jsonString}`)\n    }\n}\n\nexport function getErrorMessage(error: any): string {\n    if (error instanceof Error) {\n        return error.message\n    }\n    return String(error)\n}\n\ntype AuthFollowUpType = 'full-auth' | 're-auth' | 'missing_scopes' | 'use-supported-auth'\n\ntype AuthErrorDefinition = { match: (err: Error) => boolean; authFollowType: AuthFollowUpType }\n\nconst MISSING_BEARER_TOKEN_ERROR = 'credentialsProvider does not have bearer token credentials'\nconst INVALID_TOKEN = 'The bearer token included in the request is invalid.'\nconst GENERIC_UNAUTHORIZED_ERROR = 'User is not authorized to make this call'\n\nconst AUTH_ERROR_DEFINITION_LIST: AuthErrorDefinition[] = [\n    {\n        match: (err: Error) => err.message.startsWith(MISSING_BEARER_TOKEN_ERROR),\n        authFollowType: 'full-auth',\n    },\n    {\n        match: (err: Error) => err.message.startsWith(INVALID_TOKEN),\n        authFollowType: 're-auth',\n    },\n    {\n        match: (err: Error) => err.message.startsWith(GENERIC_UNAUTHORIZED_ERROR),\n        authFollowType: 'full-auth',\n    },\n]\n\nexport function getAuthFollowUpType(err: unknown): AuthFollowUpType | undefined {\n    return err instanceof Error\n        ? AUTH_ERROR_DEFINITION_LIST.find(definition => definition.match(err))?.authFollowType\n        : undefined\n}\n\nexport function createAuthFollowUpResult(authType: AuthFollowUpType): ChatResult {\n    let pillText\n    switch (authType) {\n        case 'full-auth':\n            pillText = 'Authenticate'\n            break\n        case 'use-supported-auth':\n        case 'missing_scopes':\n            pillText = 'Enable Amazon Q'\n            break\n        case 're-auth':\n            pillText = 'Re-authenticate'\n            break\n    }\n\n    return {\n        body: '',\n        followUp: {\n            text: '',\n            options: [{ pillText, type: authType }],\n        },\n    }\n}\n\nexport function getBearerTokenFromProvider(credentialsProvider: CredentialsProvider) {\n    if (!credentialsProvider.hasCredentials('bearer')) {\n        throw new Error(MISSING_BEARER_TOKEN_ERROR)\n    }\n\n    const credentials = credentialsProvider.getCredentials('bearer') as BearerCredentials\n\n    if (!credentials.token) {\n        throw new Error(MISSING_BEARER_TOKEN_ERROR)\n    }\n\n    return credentials.token\n}\n\nexport const flattenMetric = (obj: any, prefix = '') => {\n    const flattened: any = {}\n\n    Object.keys(obj).forEach(key => {\n        const value = obj[key]\n\n        if (prefix !== '') {\n            key = '_' + key\n        }\n\n        if (typeof value === 'object' && value !== null) {\n            Object.assign(flattened, flattenMetric(value, prefix + key))\n        } else {\n            flattened[prefix + key] = value\n        }\n    })\n\n    return flattened\n}\n"
+            ]
+        },
+        "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+        "hash": "82f30fe6c41ff827eea0d94319f8844e6b289945",
+        "contentHash": "b3016b95d065f3f4b2790e56b8ef8700a900ab6f7bdb0580d4ec52b369c4eac0"
+    }
+}
