@@ -1,3 +1,4 @@
+import { SsoAuthServer } from '@amzn/device-sso-auth-lsp'
 import { standalone } from '@aws/language-server-runtimes/runtimes'
 import { RuntimeProps } from '@aws/language-server-runtimes/runtimes/runtime'
 import {
@@ -21,6 +22,7 @@ const props: RuntimeProps = {
         QConfigurationServerTokenProxy,
         QNetTransformServerTokenProxy,
         QChatServerProxy,
+        SsoAuthServer,
     ],
     name: 'AWS CodeWhisperer',
 }

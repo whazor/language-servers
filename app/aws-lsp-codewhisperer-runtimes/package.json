@@ -10,6 +10,7 @@
         "webpack": "webpack"
     },
     "dependencies": {
+        "@amzn/device-sso-auth-lsp": "*",
         "@aws/language-server-runtimes": "^0.2.26",
         "@aws/lsp-codewhisperer": "*",
         "copyfiles": "^2.4.1"
