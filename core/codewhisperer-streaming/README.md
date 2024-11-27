@@ -1,3 +1,4 @@
+MINOR CHANGE TEST
 <!-- generated file, do not edit directly -->
 
 # @amzn/codewhisperer-streaming

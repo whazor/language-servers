@@ -309,3 +309,7 @@ Sometimes there is a need to build and develop both Language Servers with Langua
     ```
 
 Using local checkout of `language-server-runtimes` you can iterate or experiment with both projects and produce working language server builds locally. Built servers can be found in `./app/**/build` folder.
+
+## Commit Message Guidelines
+
+TODO

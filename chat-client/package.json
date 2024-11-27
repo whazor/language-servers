@@ -18,7 +18,8 @@
         "test:unit": "ts-mocha -b 'src/**/*.test.ts'",
         "test": "npm run test:unit",
         "fix:prettier": "prettier . --write",
-        "package": "webpack"
+        "package": "webpack",
+        "prepack": "npm run compile && npm run package"
     },
     "dependencies": {
         "@aws/chat-client-ui-types": "^0.0.8",
